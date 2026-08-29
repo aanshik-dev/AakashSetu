@@ -1,0 +1,284 @@
+/* MapView.css */
+
+.map-view-container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.leaflet-map-root {
+  width: 100%;
+  height: 100%;
+}
+
+.pin-mode-active {
+  cursor: crosshair !important;
+}
+
+.pin-mode-active .leaflet-container {
+  cursor: crosshair !important;
+}
+
+.pin-mode-banner {
+  position: fixed;
+  top: calc(var(--stats-height) + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 24px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: rgba(17, 24, 39, 0.9);
+  border: 1px solid var(--accent-cyan);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+  animation: slide-in-down 0.3s ease;
+}
+
+@keyframes slide-in-down {
+  from {
+    transform: translate(-50%, -20px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+.pin-mode-indicator {
+  font-size: 16px;
+}
+
+/* ─── Drone Leaflet Marker Styles ─── */
+
+.custom-drone-leaflet-icon {
+  background: transparent !important;
+  border: none !important;
+}
+
+.drone-marker-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.drone-marker-wrapper:hover {
+  transform: scale(1.15) !important;
+}
+
+.drone-svg-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-out;
+}
+
+.drone-svg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
+}
+
+/* Pulse rings for status states */
+.drone-pulse-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.drone-marker-wrapper.normal .drone-pulse-ring {
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  animation: ripple 3s infinite ease-out;
+}
+
+.drone-marker-wrapper.warning .drone-pulse-ring {
+  border: 2px solid var(--accent-amber);
+  animation: ripple 1.2s infinite ease-out;
+}
+
+.drone-marker-wrapper.critical .drone-pulse-ring {
+  border: 3px solid var(--accent-red);
+  animation: ripple 0.6s infinite ease-out;
+}
+
+.drone-alt-badge {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 14, 26, 0.9);
+  padding: 1px 5px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--accent-cyan);
+  font-size: 8px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* ─── Source & Dest Pin Markers ─── */
+
+.custom-pin-leaflet-icon {
+  background: transparent !important;
+  border: none !important;
+}
+
+.pin-marker-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pin-inner {
+  background: var(--pin-color);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
+}
+
+.pin-point {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--pin-color);
+}
+
+/* ─── Popups ─── */
+
+.drone-popup-card {
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.drone-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 6px;
+}
+
+.drone-id-tag {
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+}
+
+.status-badge {
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+}
+
+.drone-op-name {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.drone-metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 8px;
+  border-radius: var(--radius-sm);
+}
+
+.metric-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-box .lbl {
+  font-size: 9px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.metric-box .val {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+}
+
+.drone-popup-warning {
+  background: var(--accent-red-dim);
+  border: 1px solid rgba(255, 49, 88, 0.4);
+  color: var(--accent-red);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.drone-coords {
+  font-size: 9px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.zone-popup-card {
+  min-width: 200px;
+}
+
+.zone-popup-card h3 {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 6px 0 4px 0;
+  color: var(--text-primary);
+}
+
+.zone-popup-card p {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.zone-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  font-size: 9px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.zone-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 10px;
+  color: var(--text-tertiary);
+}
